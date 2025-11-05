@@ -1,11 +1,24 @@
 from flask import Flask, render_template, request, jsonify
+import os
+import sys
+
+# Add the current directory to the path
+sys.path.insert(0, os.path.dirname(__file__))
+
 from app import Retriever, CognitiveNeuroAssistant, KB_DOCS, FAQ
 
 app = Flask(__name__)
 
-# Initialize the assistant
-retriever = Retriever(KB_DOCS, FAQ)
-bot = CognitiveNeuroAssistant(retriever=retriever, mode="tutor")
+# Initialize the assistant (singleton pattern for serverless)
+_retriever = None
+_bot = None
+
+def get_bot():
+    global _retriever, _bot
+    if _bot is None:
+        _retriever = Retriever(KB_DOCS, FAQ)
+        _bot = CognitiveNeuroAssistant(retriever=_retriever, mode="tutor")
+    return _bot
 
 @app.route('/')
 def home():
@@ -14,6 +27,7 @@ def home():
 @app.route('/chat', methods=['POST'])
 def chat():
     try:
+        bot = get_bot()
         data = request.get_json()
         user_message = data.get('message', '').strip()
         
@@ -33,6 +47,7 @@ def chat():
 @app.route('/mode', methods=['POST'])
 def change_mode():
     try:
+        bot = get_bot()
         data = request.get_json()
         mode = data.get('mode', 'tutor').strip().lower()
         
@@ -48,7 +63,6 @@ def change_mode():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# For Vercel serverless
-if __name__ != '__main__':
-    # Vercel handler
-    handler = app
+# For local development
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)

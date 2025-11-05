@@ -249,15 +249,6 @@ INTENT_PATTERNS = {
     "imaging": re.compile(r"\b(fmri|eeg|pet|meg|tms|mri|scan|imaging|neuroimaging)\b", re.I),
 }
 
-INTENT_PATTERNS = {
-    "greet": re.compile(r"\b(hi|hello|hey|namaste|yo)\b", re.I),
-    "define": re.compile(r"\b(define|what is|meaning of|explain)\b", re.I),
-    "compare": re.compile(r"\b(vs\.?|versus|difference between|compare)\b", re.I),
-    "design": re.compile(r"\b(experiment|design|within[- ]subject|between[- ]subject|counterbalance|power)\b", re.I),
-    "stats": re.compile(r"\b(glm|anova|regression|multiple comparisons|fdr|permutation|effect size|confidence interval)\b", re.I),
-    "brain_region": re.compile(r"\b(hippocampus|amygdala|prefrontal|dmn|default mode|broca|wernicke|arcuate)\b", re.I),
-}
-
 # -------------------------------
 # 3) Retrieval engine
 # -------------------------------
