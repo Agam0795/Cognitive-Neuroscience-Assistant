@@ -2,12 +2,14 @@ from flask import Flask, render_template, request, jsonify
 import os
 import sys
 
-# Add the current directory to the path
-sys.path.insert(0, os.path.dirname(__file__))
+# Add parent directory to path
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from app import Retriever, CognitiveNeuroAssistant, KB_DOCS, FAQ
 
-app = Flask(__name__)
+app = Flask(__name__, 
+            template_folder=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'templates'),
+            static_folder=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static'))
 
 # Initialize the assistant (singleton pattern for serverless)
 _retriever = None
@@ -63,9 +65,5 @@ def change_mode():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# For local development
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
-
-# Vercel expects this
-handler = app
+# Vercel handler
+app = app
