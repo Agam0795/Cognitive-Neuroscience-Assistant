@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Neuroscience Assistant 🧠</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 Cognitive Neuroscience Assistant</h1>
+            <p class="subtitle">Your AI-powered guide to brain imaging, memory, experimental design, and more</p>
+        </header>
+
+        <div class="mode-selector">
+            <label for="mode">Response Mode:</label>
+            <select id="mode" onchange="changeMode()">
+                <option value="tutor" selected>Tutor (Detailed)</option>
+                <option value="concise">Concise (Brief)</option>
+            </select>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <strong>Assistant:</strong> Hello! I'm your expert Cognitive Neuroscience Assistant specializing in:
+                    <ul>
+                        <li><strong>Neurotransmitters:</strong> dopamine, serotonin, GABA, glutamate, acetylcholine, and more</li>
+                        <li><strong>Brain Regions:</strong> prefrontal cortex, hippocampus, amygdala, basal ganglia, etc.</li>
+                        <li><strong>Disorders:</strong> ADHD, Parkinson's, Alzheimer's, depression, anxiety, schizophrenia</li>
+                        <li><strong>Treatments:</strong> medications, therapy, natural approaches, brain stimulation</li>
+                        <li><strong>Research Methods:</strong> fMRI, EEG, PET, TMS, experimental design</li>
+                        <li><strong>Cognitive Functions:</strong> memory, attention, executive functions, decision-making</li>
+                    </ul>
+                    Ask me anything about these topics!
+                </div>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <textarea 
+                id="userInput" 
+                placeholder="Type your question here..." 
+                rows="3"
+                onkeypress="handleKeyPress(event)"></textarea>
+            <button id="sendBtn" onclick="sendMessage()">
+                <span id="btnText">Send</span>
+                <span id="btnLoader" class="loader hidden"></span>
+            </button>
+        </div>
+
+        <div class="examples">
+            <p><strong>Example questions:</strong></p>
+            <div class="example-tags">
+                <span class="tag" onclick="setQuestion('How does dopamine affect motivation?')">Dopamine & motivation</span>
+                <span class="tag" onclick="setQuestion('What causes Parkinson disease?')">Parkinson's disease</span>
+                <span class="tag" onclick="setQuestion('Explain ADHD treatments')">ADHD treatments</span>
+                <span class="tag" onclick="setQuestion('How do SSRIs work for depression?')">SSRIs mechanism</span>
+                <span class="tag" onclick="setQuestion('What is neuroplasticity?')">Neuroplasticity</span>
+                <span class="tag" onclick="setQuestion('Compare EEG and fMRI')">EEG vs fMRI</span>
+                <span class="tag" onclick="setQuestion('What does the hippocampus do?')">Hippocampus function</span>
+                <span class="tag" onclick="setQuestion('Explain the amygdala role in fear')">Amygdala & fear</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built with Python Flask • Powered by TF-IDF retrieval</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
