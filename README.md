@@ -4,7 +4,7 @@ An intelligent chatbot powered by information retrieval that provides expert kno
 
 ## 🌐 Live Demo
 
-**Deployed on Vercel:** [https://cognitive-neuroscience-assistant-hv10k5b4t.vercel.app](https://cognitive-neuroscience-assistant-hv10k5b4t.vercel.app)
+**Deployed on Vercel:** [https://cognitive-neuroscience-assistant-cqzx4ph32.vercel.app](https://cognitive-neuroscience-assistant-cqzx4ph32.vercel.app)
 
 ## ✨ Features
 
